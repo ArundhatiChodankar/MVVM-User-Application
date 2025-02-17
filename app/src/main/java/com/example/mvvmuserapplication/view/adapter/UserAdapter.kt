@@ -11,7 +11,7 @@ import com.example.mvvmuserapplication.databinding.ItemUserBinding
 import com.example.mvvmuserapplication.model.data.model.User
 import com.example.mvvmuserapplication.view.interfaces.OnItemClickListener
 
-class UserAdapter(val context: Context, val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+class UserAdapter(val context: Context, private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
     class MyViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User, onItemClickListener: OnItemClickListener) {
             binding.user = user

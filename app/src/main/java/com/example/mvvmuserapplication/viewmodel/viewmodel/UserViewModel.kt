@@ -17,12 +17,12 @@ import kotlinx.coroutines.launch
 
 class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
-    private lateinit var getAllUsersResponseMD: MutableLiveData<APIResponse<GetAllUsersResponse>>
-    private lateinit var userDetailsResponseMD: MutableLiveData<APIResponse<UserDetailsResponse>>
-    private lateinit var loginResponseMD: MutableLiveData<APIResponse<LoginResponse>>
-    private lateinit var registerResponseMD: MutableLiveData<APIResponse<RegisterResponse>>
+    private var getAllUsersResponseMD: MutableLiveData<APIResponse<GetAllUsersResponse>> = MutableLiveData()
+    private var userDetailsResponseMD: MutableLiveData<APIResponse<UserDetailsResponse>> = MutableLiveData()
+    private var loginResponseMD: MutableLiveData<APIResponse<LoginResponse>> = MutableLiveData()
+    private var registerResponseMD: MutableLiveData<APIResponse<RegisterResponse>> = MutableLiveData()
 
-    suspend fun getUsersList() {
+     fun getUsersList() {
         viewModelScope.launch {
             getAllUsersResponseMD.postValue(APIResponse.Loading())
             val response = userRepository.getUsersList()
@@ -30,7 +30,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    suspend fun getUserDetailsById(id: String) {
+     fun getUserDetailsById(id: String) {
         viewModelScope.launch {
             userDetailsResponseMD.postValue(APIResponse.Loading())
             val response = userRepository.getUserDetailsById(id)
@@ -38,7 +38,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    suspend fun loginUser(loginRequest: LoginRequest) {
+    fun loginUser(loginRequest: LoginRequest) {
         viewModelScope.launch {
             loginResponseMD.postValue(APIResponse.Loading())
             val response = userRepository.loginUser(loginRequest)
@@ -46,7 +46,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    suspend fun registerUser(registerRequest: RegisterRequest) {
+     fun registerUser(registerRequest: RegisterRequest) {
         viewModelScope.launch {
             registerResponseMD.postValue(APIResponse.Loading())
             val response = userRepository.registerUser(registerRequest)
@@ -77,15 +77,11 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    suspend fun deleteFromFavourite(id: String){
+     fun deleteFromFavourite(id: String){
         viewModelScope.launch {
             userRepository.deleteFromFavourite(id)
         }
     }
-    suspend fun getAllFavouriteUsers(){
-        viewModelScope.launch {
-            userRepository.getAllFavouriteUsers()
-        }
-    }
+    fun getAllFavouriteUsers() = userRepository.getAllFavouriteUsers()
 
 }

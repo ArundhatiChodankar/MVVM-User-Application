@@ -5,4 +5,13 @@ plugins {
     id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false
 }
 
-buildscript { dependencies { classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0") } }
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Other dependencies
+        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.7" ) // Add this line
+    }
+}

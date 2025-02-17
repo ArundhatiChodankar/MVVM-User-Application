@@ -26,7 +26,7 @@ class UserRepository(private val db: AppDatabase) : BaseRepo() {
 
     suspend fun deleteFromFavourite(id: String) = db.getUserDao().deleteFromFavourite(id)
 
-    suspend fun getAllFavouriteUsers() = db.getUserDao().getAllFavouriteUsers()
+     fun getAllFavouriteUsers() = db.getUserDao().getAllFavouriteUsers()
 
 
 }

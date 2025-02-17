@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@{User.first_name - User.last_name}"
+            android:text='@{User.first_name+" " +User.last_name}'
             app:layout_constraintBottom_toBottomOf="@+id/userProfileIV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userProfileIV"
