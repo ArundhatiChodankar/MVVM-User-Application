@@ -6,17 +6,20 @@ import com.example.mvvmuserapplication.model.data.model.User
 import com.example.mvvmuserapplication.model.data.retrofit.RetrofitInstance
 import com.example.mvvmuserapplication.model.data.room.AppDatabase
 
-class UserRepository(private val db: AppDatabase) {
+class UserRepository(private val db: AppDatabase) : BaseRepo() {
 
-    suspend fun getUsersList() = RetrofitInstance.userAPI.getUsersList()
+    suspend fun getUsersList() = safeApiCall { RetrofitInstance.userAPI.getUsersList() }
 
-    suspend fun getUserDetailsById(id: String) = RetrofitInstance.userAPI.getUserDetailsById(id)
+    suspend fun getUserDetailsById(id: String) =
+        safeApiCall { RetrofitInstance.userAPI.getUserDetailsById(id) }
 
     suspend fun loginUser(loginRequest: LoginRequest) =
-        RetrofitInstance.userAPI.loginUser(loginRequest)
+        safeApiCall { RetrofitInstance.userAPI.loginUser(loginRequest) }
 
-    suspend fun registerUser(registerRequest: RegisterRequest) =
+
+    suspend fun registerUser(registerRequest: RegisterRequest) = safeApiCall {
         RetrofitInstance.userAPI.registerUser(registerRequest)
+    }
 
 
     suspend fun insertFavouriteUser(user: User) = db.getUserDao().insertFavouriteUser(user)
