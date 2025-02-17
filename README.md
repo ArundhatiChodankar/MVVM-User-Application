@@ -62,3 +62,8 @@ apply plugin(androidx.navigation.safeargs.kotlin)
 //OR
 
    id("androidx.navigation.safeargs.kotlin")
+   
+4. add room schema to app level file
+ ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
